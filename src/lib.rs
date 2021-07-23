@@ -1,20 +1,26 @@
+use std::fmt;
+use std::fmt::*;
 
-    #[derive(Debug)]
+struct Employee {
+    name: String,
+    department: String,
+}
 
-    struct Employee {
-        name: String,
-        department: String,
+impl Display for Employee {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{} {}", self.name, self.department)
     }
+}
 
-    impl Employee {
-        pub fn new() -> Employee {
-            let new_employee = Employee {
-                name : String::new(),
-                department : String::new(),
-            };
-            new_employee
-        }
+impl Employee {
+    pub fn new() -> Employee {
+        let new_employee = Employee {
+            name : String::new(),
+            department : String::new(),
+        };
+        new_employee
     }
+}
 
 #[cfg(test)]
 mod tests {
@@ -24,6 +30,6 @@ mod tests {
         let mut new_employee = Employee::new();
         new_employee.name = "John".to_string();
         new_employee.department = "Sales".to_string();
-        println!("{:?}", new_employee);
+        println!("{}", new_employee);
     }
 }
