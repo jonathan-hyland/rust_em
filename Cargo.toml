@@ -1,0 +1,9 @@
+[package]
+name = "rust_em"
+version = "0.1.0"
+authors = ["Jonathan Hyland <85582235+jonathan-hyland@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
