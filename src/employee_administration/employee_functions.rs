@@ -4,6 +4,8 @@ pub mod employee_funcs {
 
     use crate::employee_administration::employee_functions::employee::emp::Employee;
     use std::io;
+    use std::io::Write;
+    use std::fs::File;
 
     pub fn add_employees() {
         // Initialize vector, entry variables, and loop control
@@ -12,10 +14,10 @@ pub mod employee_funcs {
         let mut dept_name_entry = String::new();
         let mut cmd_loop = true;
     
-        // Begin 'employee loop'. User will be asked to enter employee's name and department.
-        // A new instance of Employee is created and the 'name' and 'department' values are mapped to 'emp_name_entry'
-        // and 'dept_name_entry', respectively. Employee is then pushed to a Vector that will hold all employees added
-        // during the current session.
+        /* Begin 'employee loop'. User will be asked to enter employee's name and department.
+        A new instance of Employee is created and the 'name' and 'department' values are mapped to 'emp_name_entry'
+        and 'dept_name_entry', respectively. Employee is then pushed to a Vector that will hold all employees
+        added during the current session. */
     
         while cmd_loop == true {
             println!("Please enter the employee's name.");
@@ -57,7 +59,11 @@ pub mod employee_funcs {
                     } else if go_on.trim().to_string() == no {
                         go_on_loop = false;
                         cmd_loop = false;
-                        println!("{:#?}", employees);
+                        let mut directory = File::create("employee.txt").expect("unable to make file");
+                        for e in &employees {
+                            directory.write(e).expect("cannot write data");
+                        }
+                        // println!("{:#?}", employees);
                     } else {
                         go_on_loop = true;
                         println!("Please enter y or n.");

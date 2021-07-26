@@ -1,3 +1,5 @@
+// Contains the definition for the Employee struct and related functions.
+
 pub mod emp {
     
     use std::fmt;

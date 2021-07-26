@@ -22,21 +22,28 @@ pub mod employee_admin {
             io::stdin()
                 .read_line(&mut cmd)
                 .expect("Please enter a valid command.");
-        
-            if cmd.trim() == "1".to_string() {
-                println!("Adding new employee...");
-                start_loop = false;
-                add_employees();
-            } else if cmd.trim() == "2".to_string() {
-                println!("Accessing editing functions...");
-                start_loop = false;
-            } else if cmd.trim() == "3".to_string() {
-                println!("Accessing deletion functions...");
-                start_loop = false;
-            } else {
-                println!("Please enter a valid command.");
-                cmd.clear();
-                start_loop = true;
+            
+            let cmd_trim = cmd.trim();
+
+            match cmd_trim.parse::<i32>() {
+                Ok(1) => {
+                    println!("Adding new employees...");
+                    start_loop = false;
+                    add_employees();
+                }
+                Ok(2) => {
+                    println!("Accessing employee information...");
+                    start_loop = false;
+                }
+                Ok(3) => {
+                    println!("Delete an employee. WARNING: This action is not reversable!");
+                    start_loop = false;
+                },
+                _ => {
+                    println!("Please enter a valid command.");
+                    cmd.clear();
+                    start_loop = true;
+                }
             }
         }
     }
