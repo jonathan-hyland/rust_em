@@ -4,7 +4,6 @@ pub mod employee_funcs {
 
     use crate::employee_administration::employee_functions::employee::emp::Employee;
     use std::io;
-    use std::io::Write;
     use std::fs::File;
 
     pub fn add_employees() {
@@ -61,9 +60,9 @@ pub mod employee_funcs {
                         cmd_loop = false;
                         let mut directory = File::create("employee.txt").expect("unable to make file");
                         for e in &employees {
-                            directory.write(e).expect("cannot write data");
+                            bincode::serialize_into(&mut directory, e).unwrap();
                         }
-                        // println!("{:#?}", employees);
+                        println!("{:#?}", employees);
                     } else {
                         go_on_loop = true;
                         println!("Please enter y or n.");

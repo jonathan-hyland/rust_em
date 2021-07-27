@@ -1,28 +1,28 @@
 // Contains the definition for the Employee struct and related functions.
-
 pub mod emp {
     
-    use std::fmt;
-    use std::fmt::*;
-    use rand;
-    
-    #[derive(Debug)]
+    use core::fmt;
+    use core::fmt::Display;
+    use serde::{Serialize, Deserialize};
+    use uuid::Uuid;
+
+    #[derive(Serialize, Deserialize, Debug)]
     pub struct Employee {
-        id: i128,
+        id: Uuid,
         pub name: String,
         pub department: String,
     }
     
     impl Display for Employee {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-            write!(f, "{} {} {}", self.id, self.name, self.department)
+            write!(f, "{} {}", self.name, self.department)
         }
     }
     
     impl Employee {
         pub fn new() -> Employee {
             let new_employee = Employee {
-                id : rand::random(),
+                id : Uuid::new_v4(),
                 name : String::new(),
                 department : String::new(),
             };
